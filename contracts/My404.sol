@@ -12,8 +12,8 @@ contract My404 is ERC404 {
     string public baseTokenURI;
 
     // Constructor to initialize the contract with token details and owner's initial balance
-    constructor(address _owner) ERC404("My404", "MY404", 18, 10000, _owner) {
-        balanceOf[_owner] = 10000 * 10 ** 18; // Setting the initial balance of tokens for the owner
+    constructor(address _owner) ERC404("PinHead", "PH", 18, 1000000, _owner) {
+        balanceOf[_owner] = 1000000* 10 ** 18; // Setting the initial balance of tokens for the owner
     }
 
     // Function to set the data URI, which can be used for additional metadata (change as needed)
@@ -35,6 +35,13 @@ contract My404 is ERC404 {
     function tokenURI(uint256 id) public view override returns (string memory) {
         // Potential place to append the token ID to the base URI for unique metadata per token
         // For now, it simply returns the base URI for all tokens
-        return baseTokenURI;
+        
+        // Convert the token ID to a string using Strings library
+        string memory idStr = Strings.toString(id);
+
+        //Concatenate the base URI with the token ID
+        //This forms the unique URI for the token ID
+   
+        return string(abi.encodePacked(baseTokenURI, idStr));
     }
 }
